@@ -2,13 +2,15 @@ package com.api.crud.exceptions;
 
 import java.time.Instant;
 
+import org.springframework.http.HttpStatus;
+
 public class ErrorMessage {
     
     private String message;
     private Instant timestamp;
-    private Integer statusCode;
+    private HttpStatus statusCode;
     
-    public ErrorMessage(String message, Instant timestamp, Integer statusCode){
+    public ErrorMessage(String message, Instant timestamp, HttpStatus statusCode){
         this.message = message;
         this.timestamp = timestamp;
         this.statusCode = statusCode;
@@ -30,11 +32,11 @@ public class ErrorMessage {
         this.timestamp = timestamp;
     }
 
-    public Integer getStatusCode() {
+    public HttpStatus getStatusCode() {
         return statusCode;
     }
 
-    public void setStatusCode(Integer statusCode) {
+    public void setStatusCode(HttpStatus statusCode) {
         this.statusCode = statusCode;
     }
 
