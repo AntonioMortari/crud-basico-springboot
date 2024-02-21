@@ -5,6 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "tb_products")
@@ -14,12 +18,18 @@ public class Product {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Field cannot be null")
     private String name;
 
+    @Min(value = 0)
+    @NotNull
     private Integer quantity;
 
+    @Positive(message = "Field must be greater than 0")
+    @NotNull
     private Double price;
 
+    @NotBlank(message = "Field cannot be null")
     private String description;
     //#endregion
 
