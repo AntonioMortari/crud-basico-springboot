@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.crud.entities.Product;
+import com.api.crud.exceptions.NotFoundException;
 import com.api.crud.repositories.ProductRepository;
 
 @Service
@@ -19,8 +20,8 @@ public class ProductService {
         return repository.findAll();
     }
 
-    public Optional<Product> findById(Long id){
-        Optional<Product> product = repository.findById(id);
+    public Product findById(Long id){
+        Product product = repository.findById(id).orElseThrow(() ->  new NotFoundException("Product not found"));
 
         return product;
     }
