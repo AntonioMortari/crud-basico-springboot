@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.crud.services.ProductService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.api.crud.entities.Product;
@@ -45,5 +48,20 @@ public class ProductController {
         return ResponseEntity.created(null).body(result);
     }
     
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> edit(@PathVariable Long id, @RequestBody Product obj){
+        service.update(id, obj);
+
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> destroy(@PathVariable Long id){
+        service.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
 
 }

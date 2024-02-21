@@ -32,4 +32,37 @@ public class ProductService {
         return result.getId();
     }
 
+    public void update(Long id, Product obj){
+        if(!repository.existsById(id)){
+            throw new NotFoundException("Product not found");
+        }
+
+        Product entity = repository.getReferenceById(id);
+        this.updateData(entity, obj);
+        repository.save(entity);
+    }
+
+    private void updateData(Product entity, Product obj){
+        if(obj.getName() != null){
+            entity.setName(obj.getName());
+        }
+        if(obj.getPrice() != null){
+            entity.setPrice(obj.getPrice());
+        }
+        if(obj.getQuantity() != null){
+            entity.setQuantity(obj.getQuantity());
+        }
+        if(obj.getDescription() != null){
+            entity.setDescription(obj.getDescription());
+        }
+    }
+
+    public void delete(Long id){
+        if(!repository.existsById(id)){
+            throw new NotFoundException("Product not found");
+        }
+
+        repository.deleteById(id);
+    }
+
 }
