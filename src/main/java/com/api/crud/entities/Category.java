@@ -1,9 +1,15 @@
 package com.api.crud.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -17,10 +23,17 @@ public class Category {
     @NotBlank
     private String name;
 
+    @OneToMany(mappedBy = "category")
+    private List<Product> products = new ArrayList<>();
+
     public Category(){}
 
     public Category(Long id, String name){
         this.id = id;
+        this.name = name;
+    }
+
+    public Category(String name) {
         this.name = name;
     }
 
@@ -38,6 +51,10 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Product> getProducts() {
+        return products;
     }
 
     @Override

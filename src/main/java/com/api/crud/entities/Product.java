@@ -1,9 +1,13 @@
 package com.api.crud.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -31,6 +35,11 @@ public class Product {
 
     @NotBlank(message = "Field cannot be null")
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     //#endregion
 
     public Product() {
@@ -84,6 +93,16 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @JsonIgnore
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     //#endregion
 
     //#region hashcode and equals

@@ -26,7 +26,9 @@ public class ProductService {
     }
 
     public Long create(Product product){
+
         Product result = repository.save(product);
+
 
         return result.getId();
     }
